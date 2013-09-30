@@ -16,7 +16,7 @@
     "homepage": "http://github.com/treshugart/EuropaPHP",
     "keywords": ["mvc", "view", "controller", "fast", "scalable", "simple"],
     "license": "MIT",
-    "name": "treshugart/europaphp",
+    "name": "devco/europaphp",
     "require": {
         "php": ">=5.4.0, <6.0.0",
         "ext-yaml": "1.1.*"
