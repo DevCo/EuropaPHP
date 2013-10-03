@@ -10,27 +10,27 @@ use Europa\Fs\Locator\LocatorArray;
 class Php extends ViewScriptAbstract
 {
     private $child;
-    
+
     private $helpers;
-    
+
     private $extendStack = array();
-    
+
     private $childScript;
-    
+
     private $parentScript;
 
     private $context;
-    
+
     public function __invoke(array $context = [])
     {
         // A script must be set.
         if (!$this->getScript()) {
-            Exception::toss('No view script was specified.');
+            return;
         }
 
         // ensure the script can be found
         if (!$script = $this->locateScript()) {
-            Exception::toss('The script "%s" does not exist.', $this->formatScript());
+            return;
         }
 
         // apply context
@@ -44,7 +44,7 @@ class Php extends ViewScriptAbstract
 
         // get output
         $rendered = ob_get_clean();
-        
+
         // handle view extensions
         if ($this->parentScript) {
             // set the script so the parent has access to what child has been rendered
@@ -58,11 +58,11 @@ class Php extends ViewScriptAbstract
 
             // set the rendered child so the parent has access to the rendered child
             $this->child = $rendered;
-            
+
             // render and return the output of the parent
             return $this->__invoke($context);
         }
-        
+
         return $rendered;
     }
 
@@ -85,65 +85,65 @@ class Php extends ViewScriptAbstract
 
         return $helpers($name);
     }
-    
+
     public function renderScript($script, array $context = array())
     {
         // capture old state
         $oldScript = $this->getScript();
         $oldParent = $this->parentScript;
         $oldChild  = $this->childScript;
-        
+
         // set new state
         $this->setScript($script);
         $this->parentScript = null;
         $this->childScript  = null;
-        
+
         // capture rendered script
         $render = $this->__invoke($context);
-        
+
         // reapply old state
         $this->setScript($oldScript);
         $this->parentScript = $oldParent;
         $this->childScript  = $oldChild;
-        
+
         return $render;
     }
-    
+
     public function renderChild()
     {
         return $this->child;
     }
-    
+
     public function extend($parent)
     {
         // the child is the current script
         $child = $this->getScript();
-        
+
         // child views cannot extend themselves
         if ($parent === $child) {
             Exception::toss('Child view cannot extend itself.');
         }
-        
+
         // if the child has already extended a parent, don't do anything
         if (in_array($child, $this->extendStack)) {
             return $this;
         }
-        
+
         // the extend stack makes sure that extend doesn't trigger recursion
         $this->extendStack[] = $child;
-        
+
         // set the parent
         $this->parentScript = $parent;
-        
+
         return $this;
     }
-    
+
     public function setServiceContainer(callable $helpers)
     {
         $this->helpers = $helpers;
         return $this;
     }
-    
+
     public function getServiceContainer()
     {
         return $this->helpers;
