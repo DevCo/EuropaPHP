@@ -3,29 +3,72 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e23f338a7271cea6d0841a0c0d4cc993",
+    "hash": "0bdf75baacd208fd78f5be3e2687449d",
     "packages": [
 
     ],
     "packages-dev": [
         {
-            "name": "treshugart/testes",
+            "name": "devco/event-emitter",
             "version": "1.0.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/treshugart/Testes.git",
-                "reference": "906f06d8225aa25033b44b5efb1e031a007e9052"
+                "url": "https://github.com/devco/EventEmitter.git",
+                "reference": "e4cef56f1fdd611fec41c7635b5bc2f1608cd497"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/treshugart/Testes/zipball/906f06d8225aa25033b44b5efb1e031a007e9052",
-                "reference": "906f06d8225aa25033b44b5efb1e031a007e9052",
+                "url": "https://api.github.com/repos/devco/EventEmitter/zipball/e4cef56f1fdd611fec41c7635b5bc2f1608cd497",
+                "reference": "e4cef56f1fdd611fec41c7635b5bc2f1608cd497",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Nekoo": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Robin",
+                    "email": "crobin@nekoo.com"
+                }
+            ],
+            "description": "Port of NodeJSs EventEmitter to PHP 5.4 using traits",
+            "homepage": "https://github.com/christopherobin/EventEmitter",
+            "keywords": [
+                "event",
+                "listener",
+                "observer"
+            ],
+            "time": "2013-09-27 02:03:58"
+        },
+        {
+            "name": "devco/testes",
+            "version": "1.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/devco/Testes.git",
+                "reference": "a2b36c90c7699a73d5a08aaea940d1620ee364d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/devco/Testes/zipball/a2b36c90c7699a73d5a08aaea940d1620ee364d7",
+                "reference": "a2b36c90c7699a73d5a08aaea940d1620ee364d7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
             },
             "require-dev": {
+                "devco/event-emitter": "1.0.*-dev",
                 "ext-xdebug": "*"
             },
             "type": "library",
@@ -58,7 +101,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2013-07-29 00:50:28"
+            "time": "2013-09-27 05:00:15"
         }
     ],
     "aliases": [
@@ -66,7 +109,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "treshugart/testes": 20
+        "devco/testes": 20,
+        "devco/event-emitter": 20
     },
     "platform": {
         "php": ">=5.4.0, <6.0.0",

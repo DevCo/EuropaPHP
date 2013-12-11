@@ -22,6 +22,7 @@
         "ext-yaml": "1.1.*"
     },
     "require-dev": {
-        "treshugart/testes": "1.0.x-dev"
+        "devco/testes": "1.1.*-dev",
+        "devco/event-emitter": "1.0.*-dev"
     }
 }

@@ -21,7 +21,7 @@ if (count($assertions = $suite->getAssertions()->getFailed())) {
     echo '----------' . PHP_EOL;
 
     foreach ($assertions as $ass) {
-        echo '  ' . $ass->getTestClass() . ':' . $ass->getTestLine() . ' ' . $ass->getMessage() . PHP_EOL;
+        echo '  ' . $ass->getTestClass() . '::' . $ass->getTestMethod() . '():' . $ass->getTestLine() . ' ' . $ass->getMessage() . PHP_EOL;
     }
 
     echo PHP_EOL;
@@ -32,7 +32,13 @@ if (count($exceptions = $suite->getExceptions())) {
     echo '----------' . PHP_EOL;
 
     foreach ($exceptions as $exc) {
-        echo '  ' . $exc->getFile() . ':' . $exc->getLine() . ' ' . $exc->getMessage() . PHP_EOL;
+        echo '  ' . $exc->getTestClass() . '::' . $exc->getTestMethod() . '():' . $exc->getTestLine() . ' ' . $exc->getMessage() . PHP_EOL;
+
+        foreach (explode(PHP_EOL, $exc->getException()->getTraceAsString()) as $trace) {
+            echo '    ' . $trace . PHP_EOL;
+        }
+
+        echo PHP_EOL;
     }
 
     echo PHP_EOL;
