@@ -170,7 +170,8 @@ class App implements AppInterface
 
     private function getDefaultBasePath()
     {
-        $script = dirname($_SERVER['PHP_SELF']);
+        $script = isset($_SERVER['DOCUMENT_URI']) ? $_SERVER['DOCUMENT_URI'] : $_SERVER['PHP_SELF'];
+        $script = dirname($script);
         $script = $script === '/' ? '.' : $script;
 
         return realpath($script . '/..');
