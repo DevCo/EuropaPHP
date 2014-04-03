@@ -145,10 +145,6 @@ class Http extends RequestAbstract implements HttpInterface
                         $input = json_decode($input, true);
                         break;
 
-                    case 'application/x-www-form-urlencoded':
-                        parse_str($input, $input);
-                        break;
-
                     default:
                         parse_str($input, $input);
                 }
