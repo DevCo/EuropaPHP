@@ -14,9 +14,9 @@ class Http extends RequestAbstract implements HttpInterface
     public function __construct()
     {
         $this->initDefaultUri();
+        $this->initDefaultHeaders();
         $this->initDefaultParams();
         $this->initDefaultMethod();
-        $this->initDefaultHeaders();
         $this->initDefaultIp();
     }
     
@@ -139,7 +139,17 @@ class Http extends RequestAbstract implements HttpInterface
     private function initDefaultParams()
     {
         if ($input = file_get_contents('php://input')) {
-            parse_str($input, $input);
+            if ($this->hasHeader('Content-Type')) {
+                switch ($this->getHeader('Content-Type')) {
+                    case 'application/json':
+                        $input = json_decode($input, true);
+                        break;
+
+                    default:
+                        parse_str($input, $input);
+                }
+            }
+
             $this->setParams($input);
         }
 
