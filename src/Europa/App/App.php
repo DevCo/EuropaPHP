@@ -4,6 +4,7 @@ namespace Europa\App;
 use Europa\Di\ServiceContainer;
 use Europa\Di\ServiceContainerInterface;
 use Europa\Exception\Exception;
+use Europa\Exception\NotFound;
 use Europa\Response\HttpInterface;
 
 class App implements AppInterface
@@ -62,7 +63,7 @@ class App implements AppInterface
         $router = $this->container->router;
         
         if (!$controller = $router($this->container->request)) {
-            Exception::toss('The router could not find a suitable controller for the request "%s".', $this->container->request);
+            throw new NotFound($this->container->request);
         }
 
         $this->container->event->trigger(self::EVENT_ACTION, $this, $controller);
