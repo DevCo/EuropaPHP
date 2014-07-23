@@ -357,10 +357,18 @@ class Uri
 
     public static function detectScheme()
     {
-        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
-            return 'https';
-        } elseif (isset($_SERVER['HTTP_HOST'])) {
-            return 'http';
+        if(!empty($_SERVER['HTTPS'])) {
+            if ($_SERVER['HTTPS'] !== 'off') {
+                return 'https';
+            } else {
+                return 'http';
+            }
+        } else {
+            if($_SERVER['SERVER_PORT'] == 443) {
+                return 'https';
+            } else {
+                return 'http';
+            }
         }
 
         return null;
