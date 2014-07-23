@@ -389,8 +389,17 @@ class Uri
 
     public static function detectPort()
     {
-        if (isset($_SERVER['REMOTE_PORT'])) {
-            return $_SERVER['REMOTE_PORT'];
+        if (isset($_SERVER['SERVER_PORT'])) {
+            $port = $_SERVER['SERVER_PORT'];
+
+            // only return non standard ports
+            switch($port) {
+                case 80:
+                case 443:
+                    return null;
+                default:
+                    return $port;
+            }
         }
 
         return null;
