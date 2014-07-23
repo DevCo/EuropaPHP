@@ -202,6 +202,8 @@ class Http extends RequestAbstract implements HttpInterface
         } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $values = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
             $ip     = $values[0];
+        } elseif (isset($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
         } elseif (isset($_SERVER['REMOTE_ADDR'])) {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
