@@ -381,8 +381,8 @@ class Uri
 
     public static function detectPort()
     {
-        if (isset($_SERVER['REMOTE_PORT'])) {
-            return $_SERVER['REMOTE_PORT'];
+        if (isset($_SERVER['SERVER_PORT'])) {
+            return $_SERVER['SERVER_PORT'];
         }
 
         return null;
