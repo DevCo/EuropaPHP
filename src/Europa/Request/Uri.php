@@ -357,18 +357,10 @@ class Uri
 
     public static function detectScheme()
     {
-        if(!empty($_SERVER['HTTPS'])) {
-            if ($_SERVER['HTTPS'] !== 'off') {
-                return 'https';
-            } else {
-                return 'http';
-            }
-        } elseif (isset($_SERVER['SERVER_PORT'])) {
-            if($_SERVER['SERVER_PORT'] == 443) {
-                return 'https';
-            } else {
-                return 'http';
-            }
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+            return 'https';
+        } elseif (isset($_SERVER['HTTP_HOST'])) {
+            return 'http';
         }
 
         return null;
@@ -390,16 +382,7 @@ class Uri
     public static function detectPort()
     {
         if (isset($_SERVER['SERVER_PORT'])) {
-            $port = $_SERVER['SERVER_PORT'];
-
-            // only return non standard ports
-            switch($port) {
-                case 80:
-                case 443:
-                    return null;
-                default:
-                    return $port;
-            }
+            return $_SERVER['SERVER_PORT'];
         }
 
         return null;
