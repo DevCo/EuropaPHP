@@ -381,6 +381,14 @@ class Uri
 
     public static function detectPort()
     {
+        if (isset($_SERVER['HTTP_HOST'])) {
+            $parts = explode(':', $_SERVER['HTTP_HOST'], 2);
+
+            if (isset($parts['1'])) {
+                return $parts['1'];
+            }
+        }
+
         if (isset($_SERVER['SERVER_PORT'])) {
             return $_SERVER['SERVER_PORT'];
         }
