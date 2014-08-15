@@ -389,10 +389,6 @@ class Uri
             }
         }
 
-        if (isset($_SERVER['SERVER_PORT'])) {
-            return $_SERVER['SERVER_PORT'];
-        }
-
         return null;
     }
 
