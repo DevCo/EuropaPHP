@@ -140,13 +140,12 @@ class Http extends RequestAbstract implements HttpInterface
     {
         if ($input = file_get_contents('php://input')) {
             if ($this->hasHeader('Content-Type')) {
-                switch ($this->getHeader('Content-Type')) {
-                    case 'application/json':
-                        $input = json_decode($input, true);
-                        break;
+                $contentType = explode(';', $this->getHeader('Content-Type'));
 
-                    default:
-                        parse_str($input, $input);
+                if (in_array('application/json', $contentType)) {
+                    $input = json_decode($input, true);
+                } else {
+                    parse_str($input, $input);
                 }
             }
 
