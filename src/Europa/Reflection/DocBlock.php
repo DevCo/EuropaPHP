@@ -30,9 +30,9 @@ class DocBlock
         return $this->compile();
     }
 
-    public function map($name, DocTag\DocTagInterface $tag)
+    public function map($name, $docTagClassName)
     {
-        $this->map[$name] = $tag;
+        $this->map[$name] = $docTagClassName;
         return $this;
     }
 
