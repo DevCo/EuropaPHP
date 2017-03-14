@@ -19,7 +19,7 @@
     "name": "devco/europaphp",
     "require": {
         "php": ">=5.4.0, <6.0.0",
-        "ext-yaml": "1.2.*"
+        "ext-yaml": ">=1.2"
     },
     "require-dev": {
         "devco/testes": "1.1.*-dev",
